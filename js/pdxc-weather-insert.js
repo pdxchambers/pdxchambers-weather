@@ -1,3 +1,3 @@
 jQuery(document).ready(function($){
-    $('#pdxc-top-weather').prependTo('header');
+    $('#pdxc-top-weather').prependTo('body > header');
 });
