@@ -26,13 +26,13 @@ While the widget is techically international and can be used with any country co
 ## Widget Settings
 
 Here is a breakdown of the widget settings:
-**Title** - This is the title that will be displayed at the top of the widget.
-**Zip/Postal Code** - The local postal code for the area the weather data should be pulled for. Defaults to Lake Oswego, OR USA.
-**Country Code** - The country code for the country the postal code lies in. Defaults to US.
-**Select Temperature Units** - Select between imperial (Farenheit), metric (Celcius), or Kelvin. Default is Farenheit.
-**Display Current temperature at top of page** - Choose whether or not to display current temperature at the top of the page above the header.
-**Display widget** - Choose whether or not to display the main widget.
-**Open Weather Map Application Key** - This is the application key provided by [Open Weather](https://openweathermap.org), it is required for the widget to work.
+- **Title** - This is the title that will be displayed at the top of the widget.
+- **Zip/Postal Code** - The local postal code for the area the weather data should be pulled for. Defaults to Lake Oswego, OR USA.
+- **Country Code** - The country code for the country the postal code lies in. Defaults to US.
+- **Select Temperature Units** - Select between imperial (Farenheit), metric (Celcius), or Kelvin. Default is Farenheit.
+- **Display Current temperature at top of page** - Choose whether or not to display current temperature at the top of the page above the header.
+- **Display widget** - Choose whether or not to display the main widget.
+- **Open Weather Map Application Key** - This is the application key provided by [Open Weather](https://openweathermap.org), it is required for the widget to work.
 
 ## Open Weather API Key
 This widget relies on the [Open Weather API](https://openweathermap.org/api) to function. The widget won't work without an Application key supplied by Open Weather. To get the key just visit the [Open Weather start page](https://openweathermap.org/appid) to get instructions on how to sign up for a key. Once you have the key, just copy and paste it into the Application Key field in the widget settings. If you miss this step you'll get errors and a 401 - Forbidden code from the server when the widget tries to access the API.
