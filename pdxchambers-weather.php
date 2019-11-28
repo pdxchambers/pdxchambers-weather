@@ -32,7 +32,7 @@ class pdxchambers_weather extends WP_Widget {
 	}
 
 	public function widget($args, $instance){		
-		$data = get_weather($instance['countryCode'], $instance['zipCode'], $instance['tempUnits'], $instance['api_key']);
+		$data = get_weather($instance['cityCode'], $instance['tempUnits'], $instance['api_key']);
 		if($data['cod'] != 200 && array_key_exists('message', $data)){
 			echo '<h3>Weather data not found.</h3>';
 			echo '<p><strong>Code ' . $data['cod'] . ':</strong> ' . $data['message'] . '</p>';
@@ -87,8 +87,7 @@ class pdxchambers_weather extends WP_Widget {
 	public function form( $instance ){
 		$title = 'Local Weather';
 		$formHTML = '';
-		$countryCode = 'us';
-		$zipCode = '97035';
+		$cityCode = 'Lake Oswego';
 		$tempUnits = 'imperial';
 		$topDisplay = false;
 		$widgetDisplay = false;
@@ -99,12 +98,8 @@ class pdxchambers_weather extends WP_Widget {
 			$title = $instance['title'];
 		}
 
-		if (! empty( $instance['zipCode'] )){ 
-			$zipCode = $instance['zipCode'];
-		}
-
-		if (! empty( $instance['countryCode'] )){ 
-			$countryCode = $instance['countryCode'];
+		if (! empty( $instance['cityCode'] )){ 
+			$cityCode = $instance['cityCode'];
 		}
 		if(! empty($instance['topDisplay'])){
 			$topDisplay = true;
@@ -120,11 +115,8 @@ class pdxchambers_weather extends WP_Widget {
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>">
 
-		<label for="<?php echo $this-> get_field_id( 'zipCode' ); ?>">Zip/Postal Code:</label>
-		<input class="widefat" id="<?php echo $this-> get_field_id( 'zipCode' ); ?>" name="<?php echo $this->get_field_name( 'zipCode' ); ?>" type="text" value="<?php echo $zipCode; ?>">
-
-		<label for="<?php echo $this-> get_field_id( 'countryCode' ); ?>">Country Code:</label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'countryCode' ); ?>" name="<?php echo $this->get_field_name( 'countryCode' ); ?>" type="text" value="<?php echo $countryCode;?>">
+		<label for="<?php echo $this-> get_field_id( 'cityCode' ); ?>">City:</label>
+		<input class="widefat" id="<?php echo $this-> get_field_id( 'cityCode' ); ?>" name="<?php echo $this->get_field_name( 'cityCode' ); ?>" type="text" value="<?php echo $cityCode; ?>">
 
 		<label for="<?php echo $this-> get_field_id( 'tempUnits' ); ?>">Select temperature units.</label>
 		<select  class="widefat" id="<?php echo $this-> get_field_id( 'tempUnits' ); ?>" name="<?php echo $this->get_field_name('tempUnits'); ?>">
@@ -156,8 +148,7 @@ class pdxchambers_weather extends WP_Widget {
 	public function update($new_instance, $old_instance){
 		$instance = $old_instance;
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-		$instance['countryCode'] = ( ! empty( $new_instance['countryCode'] ) ) ? strip_tags( $new_instance['countryCode'] ) : ''; 
-		$instance['zipCode'] = ( ! empty( $new_instance['zipCode'] ) ) ? strip_tags( $new_instance['zipCode'] ) : '';
+		$instance['cityCode'] = ( ! empty( $new_instance['cityCode'] ) ) ? strip_tags( $new_instance['cityCode'] ) : '';
 		$instance['tempUnits'] =  ( $new_instance['tempUnits'] != '' ) ? $new_instance['tempUnits'] : '';
 		$instance['topDisplay'] =  $new_instance['topDisplay'];
 		$instance['widgetDisplay'] = $new_instance['widgetDisplay'];
@@ -167,14 +158,9 @@ class pdxchambers_weather extends WP_Widget {
 	}
 }
 
-function get_Weather($country, $zip, $units, $api_key){
+function get_Weather($city, $units, $api_key){
 	$url = 'api.openweathermap.org/data/2.5/weather';
-	$queryString = '?zip=';
-	if($country = ''){
-		$queryString .= $zip . ',us';
-	} else {
-		$queryString .= $zip . ',' . $country;
-	}
+	$queryString = '?q=' . $city;
 
 	if($units == 'metric'){
 		$queryString .= '&units=metric';
