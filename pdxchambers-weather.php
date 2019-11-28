@@ -80,7 +80,7 @@ class pdxchambers_weather extends WP_Widget {
 		<?php
 		}
 		echo $args['after_widget'];
-		$topHTML = '<div id="pdxc-top-weather" style="background-color: black; color: white; display: ' .$displayTop . '; margin-right: 30px; text-align: right;">Current Temperature: ' . $temp . $units . '</div>';
+		$topHTML = '<div id="pdxc-top-weather" style="background-color: black; color: white; display: ' .$displayTop . '; margin-right: 30px; text-align: right;">Current Temperature in ' . $instance['cityCode'] . ': ' . $temp . $units . '</div>';
 		echo $topHTML;
 	}
 
