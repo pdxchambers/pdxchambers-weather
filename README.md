@@ -11,7 +11,7 @@ PDXChambers Weather uses the Open Weather API to pull local weather information 
 The second component is a simple temperature display at the top of the page which show the current temperature in the selected location.
 
 ## Known Issues
-While the widget is techically international and can be used with any country code/postal code combination, I've discovered in my testing that may not be the case. It does work for US postal codes, but when I tested for Canadian codes it broke. This is not an issue with the widget, but a limitation on the API side. As such it will be fixed when Open Weather fixes it on their end.
+The widget searches for weather information based on city name. Due to API limitations there is an issue for cities with the same name but different locales. The API doesn't accept city,state/province in the search string so it is not possible to search for something like "Portland,OR". This means there is ambiguity if you search for "Portland" since it is unclear if the resulting data is for "Portland, OR" or "Portland, ME". This may not get fixed as the other options for pulling weather data from the API requires one to have a city code (from Open Weather) or the Latitude/Longitude coortinates to get the weather data. Neither of those is impossible to obtain, but the point of this widget is to be as user friendly as possible.
 
 ## Installing
 1. Download the Zip file from [https://github.com/pdxchambers/pdxchambers-weather](https://github.com/pdxchambers/pdxchambers-weather)
